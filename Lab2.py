@@ -43,7 +43,7 @@ def Gauss(dict: dict):
             for j in range(0, n):
                 E1[i, j] = E1[i, j] - aik*E1[k, j]
                 A1[i, j] = A1[i, j] - aik*A1[k, j]
-    dict["x_gauss"] = x, dict["det"] = det,   dict["INV"] = E1
+    dict["x_gauss"], dict["det"], dict["INV"] = x, det, E1
     return dict
 
 
