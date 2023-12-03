@@ -50,7 +50,7 @@ def Gauss(dict: dict):
 def seidel(res):
     A1 = res["A"].copy()
     b = res["b"].copy()
-    A1[0,1:] = 0
+    A1[0][-1] = 2
     x0 = np.zeros(len(res["b"]))
     x = np.zeros(len(x0))
     LD = np.tril(A1)
@@ -58,9 +58,9 @@ def seidel(res):
     А2 = np.dot(np.linalg.inv(LD), U)
     i =0
     res["A_seidel"] = A1
-    if np.linalg.norm(А2) >= 1:
-        print(np.linalg.norm(А2))
-        raise ValueError("||(L+D)^-1*U|| >- 1, method is not convergent")
+    #if np.linalg.norm(А2) >= 1:
+    #   print(np.linalg.norm(А2))
+    #   raise ValueError("||(L+D)^-1*U|| >- 1, method is not convergent")
     while True:
         i += 1
         x = np.dot(np.linalg.inv(LD), b - np.dot(U, x0))
@@ -91,6 +91,7 @@ def resul_b(res: dict):
     print("1. result x_seidel = {}".format(res["x_seidel"]))
     print("2. residual r = {}".format(np.dot(res["A_seidel"], res["x_seidel"]) - res["b"]))
     print("3. number of iterations = {}".format(res["it"]))
+
 def main():
     res = {"A": A(), "b": b(), "INV": np.eye(7), "det": 0, "eps": 1e-4, "it": 0}
     resul_a(res)
